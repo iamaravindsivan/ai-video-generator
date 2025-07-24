@@ -22,6 +22,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@tabler/icons-react": "^3.34.1",
     "@tanstack/react-query": "^5.83.0",
+    "@tanstack/react-table": "^8.21.3",
     "@uiw/react-md-editor": "^4.0.8",
     "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",

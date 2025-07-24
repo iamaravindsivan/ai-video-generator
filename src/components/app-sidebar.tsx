@@ -5,6 +5,7 @@ import {
   IconDashboard,
   IconInnerShadowTop,
   IconSettings,
+  IconUserCircle,
 } from "@tabler/icons-react";
 
 import { NavUser } from "@/components/nav-user";
@@ -26,6 +27,11 @@ const navigationData = {
       title: "Dashboard",
       url: "/dashboard",
       icon: IconDashboard,
+    },
+    {
+      title: "Dealers",
+      url: "/dealers",
+      icon: IconUserCircle,
     },
   ],
   navSecondary: [

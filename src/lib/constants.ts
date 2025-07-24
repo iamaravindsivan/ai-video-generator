@@ -32,6 +32,8 @@ export const API_ROUTES = {
 
   // Account
   ACCOUNT: "/account",
+  // Dealers
+  DEALERS: "/dealers",
 } as const;
 
 // Public routes that don't require authentication

@@ -1,8 +1,8 @@
-import { MongoClient, Db } from 'mongodb';
-import { MONGODB_URI } from '@/lib/env';
+import { MongoClient, Db } from "mongodb";
+import { MONGODB_URI } from "@/lib/env";
 
 const uri = MONGODB_URI;
-if (!uri) throw new Error('Please define the MONGODB_URI environment variable');
+if (!uri) throw new Error("Please define the MONGODB_URI environment variable");
 
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
@@ -17,7 +17,7 @@ if (!global._mongoClientPromise) {
 
 const clientPromise = global._mongoClientPromise!;
 
-export async function getDb(dbName = "xtimate-ai"): Promise<Db> {
+export async function getDb(dbName = "ai-video-generator"): Promise<Db> {
   const client = await clientPromise;
   return client.db(dbName);
 }

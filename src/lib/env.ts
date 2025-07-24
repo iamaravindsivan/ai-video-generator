@@ -1,15 +1,27 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const envSchema = z.object({
-  MONGODB_URI: z.url('Invalid MongoDB URI'),
-  MAILJET_API_KEY: z.string().min(1, 'Mailjet API key is required'),
-  MAILJET_API_SECRET: z.string().min(1, 'Mailjet secret key is required'),
-  JWT_SECRET: z.string().min(5, 'JWT secret must be at least 5 characters'),
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  
-  NEXT_PUBLIC_BASE_URL: z.url('Invalid base URL'),  
-  
-  DONT_SEND_EMAILS: z.string().optional().transform(val => val?.toLowerCase() === 'true'),
+  MONGODB_URI: z.url("Invalid MongoDB URI"),
+  MAILJET_API_KEY: z.string().min(1, "Mailjet API key is required"),
+  MAILJET_API_SECRET: z.string().min(1, "Mailjet secret key is required"),
+  JWT_SECRET: z.string().min(5, "JWT secret must be at least 5 characters"),
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
+
+  NEXT_PUBLIC_BASE_URL: z.url("Invalid base URL"),
+
+  DONT_SEND_EMAILS: z
+    .string()
+    .optional()
+    .transform((val) => val?.toLowerCase() === "true"),
+  MARKETCHECK_API_BASE_URL: z.url("Invalid MarketCheck API base URL"),
+  MARKETCHECK_US_API_KEY: z
+    .string()
+    .min(1, "MarketCheck US API key is required"),
+  MARKETCHECK_UK_API_KEY: z
+    .string()
+    .min(1, "MarketCheck UK API key is required"),
 });
 
 // Validate environment variables
@@ -18,7 +30,9 @@ function validateEnv() {
     return envSchema.parse(process.env);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const missingVars = error.issues.map(err => `${err.path.join('.')}: ${err.message}`).join('\n');
+      const missingVars = error.issues
+        .map((err) => `${err.path.join(".")}: ${err.message}`)
+        .join("\n");
       throw new Error(`Environment validation failed:\n${missingVars}`);
     }
     throw error;
@@ -36,13 +50,15 @@ export const {
   NODE_ENV,
   NEXT_PUBLIC_BASE_URL,
   DONT_SEND_EMAILS,
+  MARKETCHECK_API_BASE_URL,
+  MARKETCHECK_US_API_KEY,
+  MARKETCHECK_UK_API_KEY,
 } = env;
 
 // Environment type for better TypeScript support
 export type Environment = typeof env;
 
 // Helper functions
-export const isDevelopment = NODE_ENV === 'development';
-export const isProduction = NODE_ENV === 'production';
-export const isTest = NODE_ENV === 'test';
-  
+export const isDevelopment = NODE_ENV === "development";
+export const isProduction = NODE_ENV === "production";
+export const isTest = NODE_ENV === "test";
